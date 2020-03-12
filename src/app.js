@@ -1,28 +1,71 @@
 console.log('app is running!');
+//create app object title/subtitle
+//user title/subtitle in the template
+//render template
 
+
+// if statements
+// ternary operators
+// logical and operator
+
+//only render the subtitle (and p tag) if subtitle exist 
+
+const app = {
+    title : 'Indesicion APP',
+    subtitle : 'Let the computer make the choice for you',
+    options:[]
+};
+
+
+const onFormSubmit = (e) =>{
+   e.preventDefault();
+   const option = e.target.elements.option.value;
+   if(option) {
+       app.options.push(option);
+       e.target.elements.option.value = ' ';
+       renderDecisonApp();
+   }
+   
+};
+
+
+const reset =() => {
+      app.options = [];
+      renderDecisonApp();
+}
 //jsx - JavaScript XML
-var template  = (
-<div>
-<h1> Decisicion App</h1>
- <p>This is some info</p>
- <ol>
-     <li>item one</li>
-     <li>item two</li>
- </ol>
- </div>
-);
 
-//create a templateTwo var JSX expression
-//div 
-//  h1 -> Jinfeng Chen
-//  p -> age:34
-//  p ->location : Dublin
-//  render templateTow instead of template
-var name = 'jenny';
-var templateTwo = (<div>
-    <h1>{name}</h1>
-    <p>Age:34</p>
-    <p>Location: Dublin</p>
-    </div>);
-var appRoot = document.getElementById('app');
-ReactDOM.render(templateTwo,appRoot);
+
+
+const appRoot = document.getElementById('app');
+
+
+// Create render function that rednders the nes jsx
+// Call it right away
+// Call it after options array added to
+
+const renderDecisonApp = () => {
+    const template  = (
+        <div>
+            <h1>{app.title}</h1>
+            <p>{app.subtitle && app.subtitle}</p>
+            <p>{app.options.length > 0? 'Here are your options.':'No option'}</p>
+            <p>{app.options.length}</p>
+            <ol>
+              {
+                  app.options.map((option) => <li key = {option}> {option} </li>)
+              }
+           </ol>
+            
+
+            <form onSubmit={onFormSubmit}>
+               <input type = "text" name = "option"/>
+               <button>Add Options</button>
+               <button onClick = {reset}>Reset</button>
+            </form>
+         </div>
+        );
+        ReactDOM.render(template,appRoot);
+};
+renderDecisonApp();
+
