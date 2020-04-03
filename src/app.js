@@ -1,71 +1,10 @@
-console.log('app is running!');
-//create app object title/subtitle
-//user title/subtitle in the template
-//render template
+//install - import - use
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import IndecisionApp from './components/IndecisionApp.js';
+import 'normalize.css/normalize.css';
+import './styles/styles.scss'
 
-// if statements
-// ternary operators
-// logical and operator
-
-//only render the subtitle (and p tag) if subtitle exist 
-
-const app = {
-    title : 'Indesicion APP',
-    subtitle : 'Let the computer make the choice for you',
-    options:[]
-};
-
-
-const onFormSubmit = (e) =>{
-   e.preventDefault();
-   const option = e.target.elements.option.value;
-   if(option) {
-       app.options.push(option);
-       e.target.elements.option.value = ' ';
-       renderDecisonApp();
-   }
-   
-};
-
-
-const reset =() => {
-      app.options = [];
-      renderDecisonApp();
-}
-//jsx - JavaScript XML
-
-
-
-const appRoot = document.getElementById('app');
-
-
-// Create render function that rednders the nes jsx
-// Call it right away
-// Call it after options array added to
-
-const renderDecisonApp = () => {
-    const template  = (
-        <div>
-            <h1>{app.title}</h1>
-            <p>{app.subtitle && app.subtitle}</p>
-            <p>{app.options.length > 0? 'Here are your options.':'No option'}</p>
-            <p>{app.options.length}</p>
-            <ol>
-              {
-                  app.options.map((option) => <li key = {option}> {option} </li>)
-              }
-           </ol>
-            
-
-            <form onSubmit={onFormSubmit}>
-               <input type = "text" name = "option"/>
-               <button>Add Options</button>
-               <button onClick = {reset}>Reset</button>
-            </form>
-         </div>
-        );
-        ReactDOM.render(template,appRoot);
-};
-renderDecisonApp();
+ReactDOM.render(<IndecisionApp />,document.getElementById('app'));
 
